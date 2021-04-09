@@ -1,11 +1,9 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 const Trail = (
     {
-        resort="Vail",
-        section="Blue Sky Basin",
-        trailName="Champagne Glades",
-        trailRating="Black Diamond"
+        trail
     }
 ) => {
 
@@ -14,16 +12,16 @@ const Trail = (
             <div className="container">
                 <div className="row">
                     <div className="col-3">
-                        {resort}
+                        {trail.resort}
                     </div>
                     <div className="col-3">
-                        {section}
+                        {trail.section}
                     </div>
                     <div className="col-3">
-                        {trailName}
+                        {trail.trailName}
                     </div>
                     <div className="col-3">
-                        {trailRating}
+                        {trail.trailRating}
                     </div>
                 </div>
             </div>
@@ -31,4 +29,10 @@ const Trail = (
         );
 }
 
-export default Trail
+const stpm = ( state ) => ({
+    trail: state.trailReducer.trail
+});
+
+const dtpm = ( dispatch ) => ({});
+
+export default connect ( stpm , dtpm ) ( Trail )

@@ -4,8 +4,11 @@ import { Provider } from 'react-redux';
 import './App.css';
 import Login from './components/login';
 import Trail from './components/trail';
+import trailReducer from './reducers/trail-reducer';
 
-const reducers = combineReducers({})
+const reducers = combineReducers({
+  trailReducer
+})
 
 const store = createStore(reducers)
 
