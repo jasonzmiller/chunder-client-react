@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import './App.css';
 import Login from './components/login';
 import Trail from './components/trail';
+import Register from './components/register';
 
 const reducers = combineReducers({})
 
@@ -18,6 +19,11 @@ function App() {
             path="/login"
             exact={true}
             component={Login}
+          />
+          <Route
+            path="/register"
+            exact={true}
+            component={Register}
           />
           <Route
             path="/trail"
