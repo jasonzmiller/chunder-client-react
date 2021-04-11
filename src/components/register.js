@@ -6,6 +6,7 @@ const Login = () => {
 
     const [usernameReg, setUsernameReg] = useState('')
     const [passwordReg, setPasswordReg] = useState('')
+
     const register = () => {
         axios({
             method: "post",

@@ -14,6 +14,7 @@ const Login = () => {
             url: "http://localhost:4000/login"
         }).then((res) => console.log(res));
     }
+
     const getUser = () => {
         axios({
             method: "get",
@@ -21,8 +22,11 @@ const Login = () => {
             url: "http://localhost:4000/user"
         }).then((res) => console.log(res));
     }
+
+    
     const [loginUsername, setLoginUsername] = useState('')
     const [loginPassword, setLoginPassword] = useState('')
+    
 
     return (
         <>
@@ -50,7 +54,6 @@ const Login = () => {
                 <h1>Get User</h1>
                 <button onClick={getUser}>Get User</button>
             </div>
-            
         </>
     )
 }
