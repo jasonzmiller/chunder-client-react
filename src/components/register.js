@@ -1,52 +1,46 @@
-import React, { useState } from 'react';
-import '../styles/login.css'
+import React, {useState} from 'react';
 import axios from 'axios';
 
+
 const Login = () => {
-    const login = () => {
+
+    const [usernameReg, setUsernameReg] = useState('')
+    const [passwordReg, setPasswordReg] = useState('')
+
+    const register = () => {
         axios({
             method: "post",
             data: {
-                username: loginUsername,
-                password: loginPassword
+                username: usernameReg,
+                password: passwordReg,
             },
             withCredentials: true,
-            url: "http://localhost:4000/login"
+            url: "http://localhost:4000/register"
         }).then((res) => console.log(res));
     }
-
     const getUser = () => {
-        axios({
-            method: "get",
-            withCredentials: true,
-            url: "http://localhost:4000/user"
-        }).then((res) => console.log(res));
+    
     }
-
-    
-    const [loginUsername, setLoginUsername] = useState('')
-    const [loginPassword, setLoginPassword] = useState('')
-    
 
     return (
         <>
             <div className="container">
                 <div className="login">
-                    <h1>Login</h1>
+                    <h1>Register</h1>
                     <input
                         type="text"
                         placeholder="Username..."
-                        onChange={e => setLoginUsername(e.target.value)}
+                        onChange={e => setUsernameReg(e.target.value)}
                     />
                     <input
                         type="password"
                         placeholder="Password..."
-                        onChange={e => setLoginPassword(e.target.value)}
+                        onChange={e => setPasswordReg(e.target.value)}
                     />
                     <input
                         type="submit"
                         value="submit"
-                        onClick={login}
+                        onClick={register}
                     />
                 </div>
             </div>
