@@ -4,10 +4,13 @@ import { Provider } from 'react-redux';
 import './App.css';
 import Login from './components/login';
 import Trail from './components/trail';
+import TrailList from './components/trail-list'
+import trailReducer from './reducers/trail-reducer';
 import Register from './components/register';
 import Profile from './components/profile';
 
 const reducers = combineReducers({
+  trailReducer
 })
 
 const store = createStore(reducers)
@@ -35,9 +38,9 @@ function App() {
             component={Profile}
           />
           <Route
-            path="/trail"
+            path="/trail-list"
             exact={true}
-            component={Trail}
+            component={TrailList}
           />
         </div>
       </Provider>

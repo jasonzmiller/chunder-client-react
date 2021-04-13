@@ -1,5 +1,6 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import TrailWarnings from './trail-warnings';
+// import { connect } from 'react-redux';
 
 const Trail = (
     {
@@ -11,17 +12,23 @@ const Trail = (
             <>
             <div className="container">
                 <div className="row">
-                    <div className="col-3">
-                        {trail.resort}
+                    <div className="col-2">
+                        {trail.mountain}
                     </div>
-                    <div className="col-3">
+                    <div className="col-2">
                         {trail.section}
                     </div>
-                    <div className="col-3">
+                    <div className="col-2">
                         {trail.trailName}
                     </div>
-                    <div className="col-3">
+                    <div className="col-2">
                         {trail.trailRating}
+                    </div>
+                    <div className="col-2">
+                        {trail.trailStatus}
+                    </div>
+                    <div className="col-2">
+                        <TrailWarnings trailWarnings={trail.trailWarnings}></TrailWarnings>
                     </div>
                 </div>
             </div>
@@ -29,10 +36,12 @@ const Trail = (
         );
 }
 
-const stpm = ( state ) => ({
-    trail: state.trailReducer.trail
-});
+export default Trail
 
-const dtpm = ( dispatch ) => ({});
+// const stpm = ( state ) => ({
+//     trail: state.trailReducer.trail
+// });
 
-export default connect ( stpm , dtpm ) ( Trail )
+// const dtpm = ( dispatch ) => ({});
+
+// export default connect ( stpm , dtpm ) ( Trail )

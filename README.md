@@ -17,3 +17,12 @@ And there will be options to add other trails
 And both the regular user and ski patrol will be able to post potential hazards, regular user will be able to “upvote them” whereas ski patrol will be able to “endorse” and mark other things like fixed or something
 
 We also could have a more detailed trail view where users could post pics / small reports but that’s not completely necessary
+
+
+
+The only objects we're storing are "trail" objects
+trails=[]
+trail: {
+    mountain: "la montana"
+    
+}
