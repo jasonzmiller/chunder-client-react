@@ -12,14 +12,11 @@ const Trail = (
             <>
             <div className="container">
                 <div className="row">
-                    <div className="col-2">
-                        {trail.mountain}
+                    <div className="col-4">
+                        {trail.trailName}
                     </div>
                     <div className="col-2">
                         {trail.section}
-                    </div>
-                    <div className="col-2">
-                        {trail.trailName}
                     </div>
                     <div className="col-2">
                         {trail.trailRating}

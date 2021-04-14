@@ -1,30 +1,19 @@
-import React, { useEffect } from 'react';
+import React, { useEffect , useState } from 'react';
 import { connect } from 'react-redux';
 import trailService from '../services/trail-service';
 import Trail from './trail';
 
 const TrailList = (
     {
-        trailsForMountain=[
-            {
-                mountain: "Vail",
-                section: "Blue Sky Basin",
-                trailName: "Champagne Glades",
-                trailRating: "Black Diamond",
-                trailStatus: "Open",
-                trailWarnings: ["Deep powder", "Trees"]
-            },
-            {
-                mountain: "Breckenridge",
-                section: "Peak 8 Alpine",
-                trailName: "Lake Chutes",
-                trailRating: "Double Black Diamond",
-                trailStatus: "Closed",
-                trailWarnings: ["Icy", "Rocky", "Cliffs"]
-            }
-        ], 
+        trails=[], 
         // findTrailsForMountain
     }) => {
+
+    const [cachedName, setCachedName] = useState("");
+    const [cachedSection, setCachedSection] = useState("");
+    const [cachedRating, setCachedRating] = useState("");
+    const [cachedStatus, setCachedStatus] = useState("");
+    const [cachedWarnings, setCachedWarnings] = useState([]);
 
     // useEffect(() => {
     //     findTrailsForMountain()
@@ -33,13 +22,41 @@ const TrailList = (
     return(
         <>
         <div>
+            <ul className="list-group">
             {
-                trailsForMountain.map((trail) => {
+                trails.map((trail) => {
                     return(
-                        <Trail trail={trail}></Trail>
+                        <li className="list-group-item">
+                            <Trail trail={trail}></Trail>
+                        </li>
                     )
                 })
             }
+            <li className="list-group-item">
+                <label>trail name</label>
+                <input className="form-control"></input>
+
+                <label>trail section</label>
+                <input className="form-control"></input>
+                
+                <label>trail rating</label>
+                <input className="form-control"></input>
+
+                <label>trail status</label>
+                <input className="form-control"></input>
+
+                <label>trail warnings</label>
+                <input className="form-control" placeholder="WOULD BE COOL IF THIS IS A DROP DOWN CHECKLIST"></input>
+                
+                <br></br>
+
+                <button 
+                    onClick={() => {}} // createTrail with cached items
+                    className="btn btn-success form-control">
+                        Create trail
+                </button>
+            </li>
+            </ul>
         </div>
         </>
     );

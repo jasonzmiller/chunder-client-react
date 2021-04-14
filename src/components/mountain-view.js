@@ -1,6 +1,6 @@
 import React , { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import weatherService from '../services/weather-service';
+import TrailList from './trail-list';
 
 const MountainView = (
     {
@@ -37,6 +37,12 @@ const MountainView = (
 
     return(
         <>
+        <h1>{mountain.name}</h1>
+        <h6>weather into will go here</h6>
+        <h6>photo/map widget?</h6>
+        <h6>should have a mountain-header component?</h6>
+        {/* TODO pass trail CRUD to TrailList */}
+        <TrailList trails={trailsForMountain}></TrailList>
         </>
     )
 }

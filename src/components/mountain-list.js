@@ -34,11 +34,15 @@ const MountainList = (
             <CreateMountain 
                 // createMountain={createMountain}
             ></CreateMountain>
+        </ul>
+
+        <ul className="list-group">
+            <h1>Mountains</h1>
         {
             mountains.map((mountain) => {
                 return(
                     <li className="list-group-item">
-                        <Link to={`/${mountain.name}`}>
+                        <Link to={`/mountains/${mountain.name}`}>
                             {mountain.name}
                         </Link>
                     </li>
