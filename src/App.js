@@ -3,14 +3,17 @@ import { combineReducers, createStore } from 'redux';
 import { Provider } from 'react-redux';
 import './App.css';
 import Login from './components/login';
-import Trail from './components/trail';
-import TrailList from './components/trail-list'
-import trailReducer from './reducers/trail-reducer';
 import Register from './components/register';
 import Profile from './components/profile';
+import MountainList from './components/mountain-list';
+import TrailList from './components/trail-list'
+import trailReducer from './reducers/trail-reducer';
+import weatherReducer from './reducers/weather-reducer';
+import MountainView from './components/mountain-view';
 
 const reducers = combineReducers({
-  trailReducer
+  trailReducer,
+  weatherReducer
 })
 
 const store = createStore(reducers)
@@ -36,6 +39,16 @@ function App() {
             path="/profile"
             exact={true}
             component={Profile}
+          />
+          <Route
+            path="/mountains"
+            exact={true}
+            component={MountainList}
+          />
+          <Route
+            path="/:mountainId"
+            exact={true}
+            component={MountainView}
           />
           <Route
             path="/trail-list"
