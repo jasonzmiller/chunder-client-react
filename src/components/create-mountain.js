@@ -1,8 +1,12 @@
 import React , { useState } from 'react';
+import mountainService from '../services/mountain-service.js';
 
 const CreateMountain = (
     {
-        createMountain
+        createMountain,
+        findMountainByName,
+        findMountainById,
+        findAllMountains
     }
 ) => {
 
@@ -27,7 +31,7 @@ const CreateMountain = (
                 <br></br>
                 
                 <button 
-                    onClick={() => {createMountain(
+                    onClick={() => {mountainService.createMountain(
                         {
                             name: cachedName,
                             city: cachedCity,
@@ -36,6 +40,18 @@ const CreateMountain = (
                     )}} // createMountain with cached items
                     className="btn btn-success form-control">
                         Create mountain
+                </button>
+                <button 
+                    onClick={() => {
+                        mountainService.findAllMountains();
+                    }}>
+                        Find All Mountains
+                </button>
+                <button 
+                    onClick={() => {
+                        mountainService.findMountainByName({cachedName});
+                    }}>
+                        Find Mountain By Name
                 </button>
         </li>
         </>
