@@ -71,6 +71,7 @@ const dtpm = ( dispatch ) => {
                 type: "FIND_WEATHER_FOR_CITY",
                 weatherReport
             }))
+            .then(weatherReport => console.log(weatherReport))
         }
     }
 }
