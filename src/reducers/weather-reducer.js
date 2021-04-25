@@ -7,7 +7,7 @@ const weatherReducer = ( state = initialState , action ) => {
         case "FIND_WEATHER_FOR_CITY":
             return {
                 ...state,
-                weatherReport: action.weatherReport
+                weatherReport: action.weather
             }
 
         default:
