@@ -9,6 +9,9 @@ export const createMountain = (newMountain) => {
             city: newMountain.city,
             state: newMountain.state
         },
+        headers: {
+            'content-type': 'application/json'
+        },
         withCredentials: true,
         url: "http://localhost:4000/mountains"
     }).then((res) => console.log(res));

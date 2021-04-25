@@ -1,15 +1,18 @@
 import axios from 'axios'
 
-export const createTrailForMountain = (mid, newTrail) => {
+export const createTrailForMountain = (newTrail) => {
     axios({
         method: "post",
         data: {
-            mountainId: mid,
+            mountainId: newTrail.mountainId,
             section: newTrail.section,
-            trailName: newTrail.name,
-            trailRating: newTrail.rating,
-            trailStatus: newTrail.status,
-            warnings: undefined
+            trailName: newTrail.trailName,
+            trailRating: newTrail.trailRating,
+            trailStatus: newTrail.trailStatus,
+            warnings: newTrail.warnings
+        },
+        headers: {
+            'content-type': 'application/json'
         },
         withCredentials: true,
         url: `http://localhost:4000/trails`
@@ -18,7 +21,10 @@ export const createTrailForMountain = (mid, newTrail) => {
 }
 export const findTrailbyId = (trailId) => {}
 
-export const findTrailsForMountain = (mountainId) => {}
+export const findTrailsForMountain = (mountainId) => {
+    return fetch(`http://localhost:4000/mountains/${mountainId}/trails`)
+        .then(response => response.json())
+}
 
 export const updateTrail = (trailId) => {}
 

@@ -1,13 +1,12 @@
-import React, { useEffect , useState , useParams } from 'react';
+import React, { useEffect , useState } from 'react';
 import { connect } from 'react-redux';
 import trailService from '../services/trail-service';
 import Trail from './trail';
-import CreateTrail from './create-trail';
 
 const TrailList = (
     {
         trails=[], 
-        // findTrailsForMountain
+        findTrailsForMountain
     }) => {
 
     // useEffect(() => {
@@ -22,6 +21,7 @@ const TrailList = (
             <ul className="list-group">
             {
                 trails.map((trail) => {
+                    console.log(trail)
                     return(
                         <li className="list-group-item">
                             <Trail trail={trail}></Trail>
