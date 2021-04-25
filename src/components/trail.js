@@ -30,7 +30,7 @@ const Trail = (
                             {trail.trailStatus}
                         </div>
                         <div className="col-2">
-                            <TrailWarnings trailWarnings={trail.trailWarnings}></TrailWarnings>
+                            <TrailWarnings trailWarnings={trail.warnings}></TrailWarnings>
                         </div>
                     </div>
                 </div>
@@ -53,7 +53,7 @@ const Trail = (
                             <input className="form-control" defaultValue={trail.trailStatus}></input>
                         </div>
                         <div className="col-2">
-                            <TrailWarnings trailWarnings={trail.trailWarnings} editing={editing}></TrailWarnings>
+                            <TrailWarnings trailWarnings={trail.warnings} editing={editing}></TrailWarnings>
                         </div>
                     </div>
                 </div>

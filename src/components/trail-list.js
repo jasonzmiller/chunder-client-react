@@ -1,13 +1,13 @@
 import React, { useEffect , useState } from 'react';
 import { connect } from 'react-redux';
-import {useParams} from "react-router-dom";
+import { useParams } from "react-router-dom";
 import trailService from '../services/trail-service';
 import Trail from './trail';
 
 const TrailList = (
     {
         trails=[], 
-        // findTrailsForMountain
+        findTrailsForMountain
     }) => {
 
     const [cachedName, setCachedName] = useState("");
@@ -17,16 +17,13 @@ const TrailList = (
     const [cachedWarnings, setCachedWarnings] = useState([]);
     const { mountainId } = useParams();
 
-    // useEffect(() => {
-    //     findTrailsForMountain()
-    // })
-
     return(
         <>
         <div>
             <ul className="list-group">
             {
                 trails.map((trail) => {
+                    console.log(trail)
                     return(
                         <li className="list-group-item">
                             <Trail trail={trail}></Trail>
@@ -36,32 +33,31 @@ const TrailList = (
             }
             <li className="list-group-item">
                 <label>trail name</label>
-                <input className="form-control"></input>
+                <input onChange={(e) => setCachedName(e.target.value)} className="form-control"></input>
 
                 <label>trail section</label>
-                <input className="form-control"></input>
+                <input onChange={(e) => setCachedSection(e.target.value)} className="form-control"></input>
                 
                 <label>trail rating</label>
-                <input className="form-control"></input>
+                <input onChange={(e) => setCachedRating(e.target.value)} className="form-control"></input>
 
                 <label>trail status</label>
-                <input className="form-control"></input>
+                <input onChange={(e) => setCachedStatus(e.target.value)} className="form-control"></input>
 
                 <label>trail warnings</label>
-                <input className="form-control" placeholder="WOULD BE COOL IF THIS IS A DROP DOWN CHECKLIST"></input>
+                <input onChange={(e) => setCachedWarnings(e.target.value)} className="form-control" placeholder="WOULD BE COOL IF THIS IS A DROP DOWN CHECKLIST"></input>
                 
                 <br></br>
 
                 <button 
                     onClick={() => {trailService.createTrailForMountain(
-                        mountainId,
                         {
                             mountainId: mountainId,
                             trailName: cachedName,
                             section: cachedSection,
                             trailRating: cachedRating,
                             trailStatus: cachedStatus,
-                            warnings: undefined
+                            warnings: cachedWarnings
                         }
                     )}} // createTrail with cached items
                     className="btn btn-success form-control">
