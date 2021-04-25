@@ -23,7 +23,6 @@ const TrailList = (
             <ul className="list-group">
             {
                 trails.map((trail) => {
-                    console.log(trail)
                     return(
                         <li className="list-group-item">
                             <Trail trail={trail}></Trail>

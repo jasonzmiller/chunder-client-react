@@ -9,8 +9,12 @@ const WeatherReport = ({
 }) => {
 
     useEffect(() => {
-        if ( weatherReport === "undefined" && typeof weatherReport === "undefined" ){
+        if ( mountain !== "undefined" && typeof mountain !== "undefined" ){
+            console.log("HERE")
             findWeatherForCity(mountain.city)
+        }
+        if ( weatherReport !== "undefined" && typeof weatherReport !== "undefined" ){
+            console.log(weatherReport)
         }
     }, [mountain.city])
 
@@ -27,7 +31,9 @@ const WeatherReport = ({
                 Wind:
             </div>
             <div className="col-12">
-                <button className="btn btn-warning" onClick={() => findWeatherForCity(mountain.city)}>REFRESH WEATHER</button>
+                <button 
+                    className="btn btn-warning" 
+                    onClick={() => findWeatherForCity(mountain.city)}>REFRESH WEATHER</button>
             </div>
 
             {/* <div className="col-12">
@@ -53,12 +59,14 @@ const stpm = ( state ) => { return {
 }}
 
 const dtpm = ( dispatch ) => { return {
-    findWeatherForCity: (city) =>
+    findWeatherForCity: (city) => {
+        console.log(city)
         weatherService.findWeatherForCity(city)
-            .then(weather => dispatch({
+            .then(weatherReport => dispatch({
             type: "FIND_WEATHER_FOR_CITY",
-            weather
-            }))
+            weatherReport
+            }))}
+
 }}
 
 export default connect ( stpm , dtpm ) ( WeatherReport )
