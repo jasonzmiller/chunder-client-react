@@ -5,25 +5,39 @@ import TrailList from './trail-list';
 import MountainHeader from './mountain-header';
 import weatherService from '../services/weather-service';
 import { findTrailsForMountain } from '../services/trail-service';
+import { findMountainById } from '../services/mountain-service';
 
 const MountainView = (
     {
         findWeatherForCity,
-        weatherReport
+        weatherReport,
     }
 ) => {
 
-    const { mountainId } = useParams()
+    const { mountainId } = useParams();
     const [trailsForMountain, setTrailsForMountain] = useState([])
+    const [mountain, setMountain] = useState({})
+
     useEffect(() => {
-        findWeatherForCity(mountainId)
-        findTrailsForMountain(mountainId)
-            .then((res) => setTrailsForMountain(
-                ...trailsForMountain,
-                res
+        if(mountain !== "undefined" && typeof mountain !== "undefined"){
+            findMountainById(mountainId)
+            .then((res) => setMountain(
+                JSON.stringify(res)
             ))
-        
-    }, [])
+        }
+        if(trailsForMountain !== "undefined" && typeof trailsForMountain !== "undefined"){
+            findTrailsForMountain(mountainId)
+                .then((res) => setTrailsForMountain(
+                    ...trailsForMountain,
+                    res
+                ));
+            }
+        if(weatherReport !== "undefined" && typeof weatherReport !== "undefined"){
+            findWeatherForCity(mountain.name);
+        }
+        console.log(mountainId)
+        console.log("mountain" + mountain)
+    }, [mountainId])
 
     return(
         <>
@@ -33,7 +47,6 @@ const MountainView = (
         <h6>weather into will go here</h6>
         <h6>photo/map widget?</h6>
         <h6>should have a mountain-header component?</h6> */}
-        <MountainHeader mountain={mountain}/>
         {/* TODO pass trail CRUD to TrailList */}
         <TrailList trails={trailsForMountain}></TrailList>
         </>

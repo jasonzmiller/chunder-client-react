@@ -10,8 +10,6 @@ const CreateMountain = (
     }
 ) => {
 
-    // can also just have a cachedMountain, setCachedMountain but unsure if this would make any difference in terms of performance
-
     const [cachedName, setCachedName] = useState("");
     const [cachedCity, setCachedCity] = useState("");
     const [cachedState, setCachedState] = useState("");

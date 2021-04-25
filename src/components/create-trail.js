@@ -1,4 +1,5 @@
-import React , { useState , useParams } from 'react';
+import React , { useState } from 'react';
+import {useParams} from 'react-router-dom';
 import trailService from '../services/trail-service';
 
 const CreateTrail = ({
@@ -41,7 +42,6 @@ const CreateTrail = ({
 
                 <button 
                     onClick={() => {trailService.createTrailForMountain(
-                        mountainId,
                         {
                             mountainId: mountainId,
                             trailName: cachedName,
