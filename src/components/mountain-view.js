@@ -21,10 +21,9 @@ const MountainView = (
     useEffect(() => {
         if(mountain !== "undefined" && typeof mountain !== "undefined"){
             findMountainById(mountainId)
-            .then((res) => setMountain(
-                JSON.stringify(res)
-            ))
+                .then(res => setMountain(res))
         }
+        
         if(trailsForMountain !== "undefined" && typeof trailsForMountain !== "undefined"){
             findTrailsForMountain(mountainId)
                 .then((res) => setTrailsForMountain(
@@ -32,15 +31,15 @@ const MountainView = (
                     res
                 ));
             }
+        
         if(weatherReport !== "undefined" && typeof weatherReport !== "undefined"){
             findWeatherForCity(mountain.name);
         }
-        console.log(mountainId)
-        console.log("mountain" + mountain)
     }, [mountainId])
 
     return(
         <>
+        <h1>{mountain.name}</h1>
         {/* <h1>{mountain.name}</h1>
         <h3>weather location: {weatherReport.name}</h3>
         <button onClick={() => findWeatherForCity(mountainId)}>REFRESH WEATHER</button>

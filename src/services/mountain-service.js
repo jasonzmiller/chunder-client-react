@@ -28,10 +28,7 @@ export const findAllMountains = () => {
 
 export const findMountainById = (mountainId) => 
     fetch(`http://localhost:4000/mountains/${mountainId}`)
-        .then((res) => {
-            console.log(res.data)
-            return res.data
-        })
+        .then(response => response.json())
 
 export const findMountainByName = (mountainName) => {
     console.log(`Trying to find mountain ${mountainName}`);
