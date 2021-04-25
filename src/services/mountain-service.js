@@ -34,8 +34,11 @@ export const findMountainByName = (mountainName) => {
             name: mountainName
         },
         withCredentials: true,
-        url:`http://localhost:4000/mountain`
-    }).then((res) => console.log(res));
+        url:`http://localhost:4000/mountains/${mountainName}`
+    }).then((res) => {
+        console.log(res)
+        return res.data
+    })
 }
 
 export const updateMountain = (mountainId) => {}

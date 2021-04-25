@@ -1,5 +1,6 @@
 import React, { useEffect , useState } from 'react';
 import { connect } from 'react-redux';
+import {useParams} from "react-router-dom";
 import trailService from '../services/trail-service';
 import Trail from './trail';
 
@@ -14,6 +15,7 @@ const TrailList = (
     const [cachedRating, setCachedRating] = useState("");
     const [cachedStatus, setCachedStatus] = useState("");
     const [cachedWarnings, setCachedWarnings] = useState([]);
+    const { mountainId } = useParams();
 
     // useEffect(() => {
     //     findTrailsForMountain()
@@ -51,7 +53,17 @@ const TrailList = (
                 <br></br>
 
                 <button 
-                    onClick={() => {}} // createTrail with cached items
+                    onClick={() => {trailService.createTrailForMountain(
+                        mountainId,
+                        {
+                            mountainId: mountainId,
+                            trailName: cachedName,
+                            section: cachedSection,
+                            trailRating: cachedRating,
+                            trailStatus: cachedStatus,
+                            warnings: undefined
+                        }
+                    )}} // createTrail with cached items
                     className="btn btn-success form-control">
                         Create trail
                 </button>
