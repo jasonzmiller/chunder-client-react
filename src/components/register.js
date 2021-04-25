@@ -6,6 +6,7 @@ const Login = () => {
 
     const [usernameReg, setUsernameReg] = useState('')
     const [passwordReg, setPasswordReg] = useState('')
+    const [adminReg, setAdminReg] = useState(false)
 
     const register = () => {
         axios({
@@ -13,6 +14,7 @@ const Login = () => {
             data: {
                 username: usernameReg,
                 password: passwordReg,
+                isAdmin: adminReg
             },
             withCredentials: true,
             url: "http://localhost:4000/register"
@@ -37,6 +39,10 @@ const Login = () => {
                         placeholder="Password..."
                         onChange={e => setPasswordReg(e.target.value)}
                     />
+                    <select onChange={(e) => setAdminReg(e.target.value === "true" ? true : false)} className="form-control">
+                        <option value="false">Skier</option>
+                        <option value="true">Patroller</option>
+                    </select>
                     <input
                         type="submit"
                         value="submit"
