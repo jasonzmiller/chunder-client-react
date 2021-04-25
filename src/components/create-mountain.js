@@ -49,7 +49,7 @@ const CreateMountain = (
                 </button>
                 <button 
                     onClick={() => {
-                        mountainService.findMountainByName({cachedName});
+                        mountainService.findMountainByName(cachedName);
                     }}>
                         Find Mountain By Name
                 </button>

@@ -1,7 +1,8 @@
-import React, { useEffect , useState } from 'react';
+import React, { useEffect , useState , useParams } from 'react';
 import { connect } from 'react-redux';
 import trailService from '../services/trail-service';
 import Trail from './trail';
+import CreateTrail from './create-trail';
 
 const TrailList = (
     {
@@ -9,15 +10,11 @@ const TrailList = (
         // findTrailsForMountain
     }) => {
 
-    const [cachedName, setCachedName] = useState("");
-    const [cachedSection, setCachedSection] = useState("");
-    const [cachedRating, setCachedRating] = useState("");
-    const [cachedStatus, setCachedStatus] = useState("");
-    const [cachedWarnings, setCachedWarnings] = useState([]);
-
     // useEffect(() => {
     //     findTrailsForMountain()
     // })
+
+    const { mountainId } = useParams();
 
     return(
         <>
@@ -32,30 +29,7 @@ const TrailList = (
                     )
                 })
             }
-            <li className="list-group-item">
-                <label>trail name</label>
-                <input className="form-control"></input>
-
-                <label>trail section</label>
-                <input className="form-control"></input>
-                
-                <label>trail rating</label>
-                <input className="form-control"></input>
-
-                <label>trail status</label>
-                <input className="form-control"></input>
-
-                <label>trail warnings</label>
-                <input className="form-control" placeholder="WOULD BE COOL IF THIS IS A DROP DOWN CHECKLIST"></input>
-                
-                <br></br>
-
-                <button 
-                    onClick={() => {}} // createTrail with cached items
-                    className="btn btn-success form-control">
-                        Create trail
-                </button>
-            </li>
+            <CreateTrail></CreateTrail>
             </ul>
         </div>
         </>

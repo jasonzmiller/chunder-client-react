@@ -11,7 +11,6 @@ const TrailWarnings = (
         {
             !editing &&
             <ul className="list-group">
-                <h6>mouseover tooltip showing the text for warning?</h6>
                 {
                     trailWarnings.map((warning) => 
                     <li className="list-group-item">
@@ -35,6 +34,7 @@ const TrailWarnings = (
                             warning === "Cliffs" &&
                             <i className="fas fa-industry">{warning}</i> 
                         }
+                        
                     </li>)
                 }
             </ul>
