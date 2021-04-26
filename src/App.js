@@ -6,6 +6,7 @@ import Login from './components/login';
 import Register from './components/register';
 import Profile from './components/profile';
 import MountainList from './components/mountain-list';
+import Weather from './components/weather';
 import TrailList from './components/trail-list'
 import trailReducer from './reducers/trail-reducer';
 import weatherReducer from './reducers/weather-reducer';
@@ -60,6 +61,11 @@ function App() {
             path="/mountains/:mountainId/trails/:trailId"
             exact={true}
             component={Trail}
+          />
+          <Route
+            path="/mountains/:mountainId/weather"
+            exact={true}
+            component={Weather}
           />
         </div>
       </Provider>

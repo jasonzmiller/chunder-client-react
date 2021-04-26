@@ -1,10 +1,31 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 export default class Profile extends React.Component {
     
     state = {
-       users: []
+       users: [],
+       mountainsForUser: [
+           {
+               name: "vail",
+               city: "vail",
+               state: "colorado",
+               _id: "103nkgj2093tnh"
+            }, 
+            {
+                name: "gore",
+                city: "north creek",
+                state: "new york",
+                _id: "lskdjfpweoif"
+            },
+            {
+                name: "sunday river",
+                city: "newry",
+                state: "maine",
+                _id: "as9023ngt3"
+            }
+        ]
     }
 
     /*
@@ -39,9 +60,36 @@ export default class Profile extends React.Component {
     render(){
     return (
         <div>
-            <h1>
-                {this.state.users.username}
-            </h1>
+            <div className="row">
+                <div>
+                    <h4>Hello, {this.state.users.username}!</h4>
+                </div>
+            </div>
+            <div>
+                <h3>Here are your favorites:</h3>
+            </div>
+            <div className="row">
+                {
+                    this.state.mountainsForUser &&
+                    this.state.mountainsForUser.map(mountain => 
+                        <div className="col-4">
+                            <ul className="list-group">
+                                <li className="list-group-item">
+                                    <img style={{height: "20rem", width: "26rem"}} src="https://images.unsplash.com/photo-1532124957326-34c5605398?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1567&q=80"></img>
+                                </li>
+                                <li className="list-group-item">
+                                    Name: <Link to={`/mountains/${mountain.name}`}>{mountain.name}</Link>
+                                </li>
+                                <li className="list-group-item">
+                                    City: {mountain.city}
+                                </li>
+                                <li className="list-group-item">
+                                    State: {mountain.state}
+                                </li>
+                            </ul>
+                        </div>)
+                }
+            </div>
         </div>
     )
 
