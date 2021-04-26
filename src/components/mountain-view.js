@@ -19,7 +19,9 @@ const MountainView = (
     const [trailsForMountain, setTrailsForMountain] = useState([])
     const [mountain, setMountain] = useState({})
 
-    useEffect(() => {
+    useEffect(async () => {
+        loadPage()
+        /*
         if(mountain !== "undefined" && typeof mountain !== "undefined"){
             findMountainById(mountainId)
                 .then(res => setMountain(res))
@@ -33,10 +35,16 @@ const MountainView = (
                 ));
             }
         
-        /* if(weatherReport !== "undefined" && typeof weatherReport !== "undefined"){
+        if(weatherReport !== "undefined" && typeof weatherReport !== "undefined"){
             findWeatherForCity(mountain.name)
-        } */
-    }, [mountainId])
+        }
+        */
+    }, [])
+
+    const loadPage = async () => {
+        findMountainById(mountainId).then(res => setMountain(res))
+        findTrailsForMountain(mountainId).then(res => setTrailsForMountain(...trailsForMountain, res))
+    }
 
     // utility function to convert a string to title case
     String.prototype.toProperCase = function () {
@@ -89,21 +97,31 @@ const MountainView = (
                 </>
             }
             </div>
-            <div className="col-6">
-                {
-                    mountain &&
-                    <WeatherReport mountain={mountain}></WeatherReport>
-                }
-            </div>
+            {/* <div className="col-6">
+                <div className="col-12">
+                        Current weather:
+                    </div>
+                <div className="col-12">
+                    Temperature (C):
+                </div>
+                <div className="col-12">
+                    Wind:
+                </div>
+                <div className="col-12">
+                    <button 
+                        className="btn btn-warning" 
+                        onClick={() => {
+                            findWeatherForCity(mountain.city)
+                            }}>REFRESH WEATHER</button>
+                </div>
+            </div> */}
+            {mountain.city !== "undefined" && typeof mountain.city !== "undefined" ? <WeatherReport city={mountain.city}></WeatherReport> : <h1>Wah</h1>}
         </div>
         <TrailList trails={trailsForMountain}></TrailList>
         </>
     )
 }
 
-export default MountainView
-
-/*
 const stpm = ( state ) => {
     return {
         weatherReport: state.weatherReducer.weatherReport
@@ -112,14 +130,12 @@ const stpm = ( state ) => {
 
 const dtpm = ( dispatch ) => {
     return {
-        findWeatherForCity: (city) => {
+        findWeatherForCity: (city) =>
             weatherService.findWeatherForCity(city)
             .then(weatherReport => dispatch({
                 type: "FIND_WEATHER_FOR_CITY",
                 weatherReport
             }))
-            .then(weather => console.log(weather))
-        }
     }
 }
 
@@ -127,4 +143,3 @@ const dtpm = ( dispatch ) => {
 // Will then pass trailsForMountain down to trail-list component
 
 export default connect ( stpm , dtpm ) ( MountainView )
-*/

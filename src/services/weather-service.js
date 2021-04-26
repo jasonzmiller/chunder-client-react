@@ -5,6 +5,7 @@ const APPID = "appid=01911f7b486c0e1468d2f43de9366608"
 export const findWeatherForCity = (city) => 
     fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=01911f7b486c0e1468d2f43de9366608`)
         .then(response => response.json())
+        .then(response => console.log(response))
 
 const api = {
     findWeatherForCity

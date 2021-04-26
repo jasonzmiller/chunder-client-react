@@ -1,54 +1,47 @@
-import React , { useEffect } from 'react';
+import React , { useEffect , useState } from 'react';
 import { connect } from 'react-redux';
 import weatherService from '../services/weather-service';
 
 const WeatherReport = ({
-    mountain,
+    city,
     weatherReport,
     findWeatherForCity
 }) => {
 
-    useEffect(() => {
-        if ( mountain !== "undefined" && typeof mountain !== "undefined" ){
-            console.log("HERE")
-            findWeatherForCity(mountain.city)
+/*     useEffect(() => {
+        if ( city !== "undefined" && typeof city !== "undefined" ){
+            findWeatherForCity(city)
         }
         if ( weatherReport !== "undefined" && typeof weatherReport !== "undefined" ){
             console.log(weatherReport)
         }
-    }, [mountain.city])
+    }, [city]) */
+
+    const [ called , setCalled ] = useState(false)
 
     return(
         <>
         <div className="row">
-            <div className="col-12">
-                    Current weather: 
+                <>
+                <div className="col-12">
+                        Current weather: {called ? weatherReport.weather[0].main : ""}
+                    </div>
+                <div className="col-12">
+                    Temperature (C): {called ? Math.round(weatherReport.main.temp - 273.15) : ""}
                 </div>
-            <div className="col-12">
-                Temperature (C):
-            </div>
-            <div className="col-12">
-                Wind:
-            </div>
-            <div className="col-12">
-                <button 
-                    className="btn btn-warning" 
-                    onClick={() => findWeatherForCity(mountain.city)}>REFRESH WEATHER</button>
-            </div>
-
-            {/* <div className="col-12">
-                    Current weather: {weatherReport.weather[0].main}
+                <div className="col-12">
+                    Wind: {called ? weatherReport.wind.speed : ""}
                 </div>
-            <div className="col-12">
-                Temperature (C): {Math.round(weatherReport.main.temp - 273.15)}
-            </div>
-            <div className="col-12">
-                Wind: {weatherReport.wind.speed}
-            </div>
-            <div className="col-12">
-                <button className="btn btn-warning" onClick={() => findWeatherForCity(mountain.city)}>REFRESH WEATHER</button>
-            </div> */}
-
+                <div className="col-12">
+                    <button 
+                        className="btn btn-warning" 
+                        onClick={() => {
+                            setCalled(true)
+                            findWeatherForCity(city)
+                            console.log(weatherReport)
+                        }}>REFRESH WEATHER</button>
+                </div>
+                </>
         </div>
         </>
     )
@@ -59,14 +52,13 @@ const stpm = ( state ) => { return {
 }}
 
 const dtpm = ( dispatch ) => { return {
-    findWeatherForCity: (city) => {
-        console.log(city)
+    findWeatherForCity: (city) =>
         weatherService.findWeatherForCity(city)
             .then(weatherReport => dispatch({
             type: "FIND_WEATHER_FOR_CITY",
             weatherReport
-            }))}
-
-}}
+            }))
+        }
+}
 
 export default connect ( stpm , dtpm ) ( WeatherReport )
