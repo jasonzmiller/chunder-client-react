@@ -1,31 +1,13 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import mountainService from '../services/mountain-service'
 
 export default class Profile extends React.Component {
     
     state = {
        users: [],
-       mountainsForUser: [
-           {
-               name: "vail",
-               city: "vail",
-               state: "colorado",
-               _id: "103nkgj2093tnh"
-            }, 
-            {
-                name: "gore",
-                city: "north creek",
-                state: "new york",
-                _id: "lskdjfpweoif"
-            },
-            {
-                name: "sunday river",
-                city: "newry",
-                state: "maine",
-                _id: "as9023ngt3"
-            }
-        ]
+       mountainsForUser: []
     }
 
     /*
