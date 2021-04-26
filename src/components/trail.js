@@ -1,5 +1,7 @@
 import React , { useState } from 'react';
+import { deleteTrail } from '../services/trail-service';
 import TrailWarnings from './trail-warnings';
+
 // import { connect } from 'react-redux';
 
 const Trail = (
@@ -18,6 +20,7 @@ const Trail = (
                     <div className="row">
                         <div className="col-4">
                             <i className="fas fa-edit" onClick={() => setEditing(true)}></i>
+                            <i className="fas fa-cross" onClick={() => deleteTrail(trail._id)}></i>
                             {trail.trailName}
                         </div>
                         <div className="col-2">

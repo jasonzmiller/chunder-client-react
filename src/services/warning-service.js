@@ -28,7 +28,13 @@ export const updateWarning = (warningId) => {
     
 }
 
-export const deleteWarning = (warningId) => {}
+export const deleteWarning = (warningId) => {
+    fetch(`http://localhost:4000/warnings/${warningId}`, {
+        method: "DELETE",
+        withCredentials: true
+    })
+        .then(response => response.json())
+}
 
 const api = {
     createWarningForTrail,

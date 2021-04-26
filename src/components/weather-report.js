@@ -11,6 +11,7 @@ const WeatherReport = ({
     useEffect(() => {
         if ( mountain !== "undefined" && typeof mountain !== "undefined" ){
             console.log("HERE")
+
             findWeatherForCity(mountain.city)
         }
         if ( weatherReport !== "undefined" && typeof weatherReport !== "undefined" ){

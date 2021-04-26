@@ -28,7 +28,13 @@ export const findTrailsForMountain = (mountainId) => {
 
 export const updateTrail = (trailId) => {}
 
-export const deleteTrail = (trailId) => {}
+export const deleteTrail = (trailId) => {
+    fetch(`http://localhost:4000/trails/${trailId}`, {
+        method: "DELETE",
+        withCredentials: true
+    })
+        .then(response => response.json())
+}
 
 const api = {
     createTrailForMountain,
