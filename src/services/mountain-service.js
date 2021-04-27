@@ -17,6 +17,21 @@ export const createMountain = (newMountain) => {
     }).then((res) => console.log(res));
 }
 
+export const addMountainToUser = (mid, uid) => {
+    axios({
+        method: "post",
+        data: {
+            mid: mid,
+            uid: uid
+        },
+        headers: {
+            'content-type': 'application/json'
+        },
+        withCredentials: true,
+        url: `http://localhost:4000/${uid}/mountains`
+    }).then(response => response.json())
+}
+
 export const findAllMountains = () => {
     console.log("Trying to find mountains");
     axios({
@@ -24,6 +39,11 @@ export const findAllMountains = () => {
         withCredentials: true,
         url: 'http://localhost:4000/mountains'
     }).then((res) => console.log(res));
+}
+
+export const findMountainsForUser = (userId) => {
+    return fetch(`http://localhost:4000/${userId}/mountains`)
+        .then(response => response.json())
 }
 
 export const findMountainById = (mountainId) => 
@@ -57,7 +77,8 @@ const api = {
     findMountainByName,
     findMountainById,
     updateMountain,
-    deleteMountain
+    deleteMountain,
+    findMountainsForUser
 }
 
 export default api

@@ -49,6 +49,11 @@ function App() {
             component={MountainList}
           />
           <Route
+            path="/:uid/mountains"
+            exact={true}
+            component={MountainList}
+          />
+          <Route
             path="/mountains/:mountainId"
             exact={true}
             component={MountainView}
