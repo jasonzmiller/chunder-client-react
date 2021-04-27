@@ -12,6 +12,7 @@ import trailReducer from './reducers/trail-reducer';
 import weatherReducer from './reducers/weather-reducer';
 import MountainView from './components/mountain-view';
 import Trail from './components/trail';
+import TrailView from './components/trail-view';
 
 const reducers = combineReducers({
   trailReducer,
@@ -60,7 +61,7 @@ function App() {
           <Route
             path="/mountains/:mountainId/trails/:trailId"
             exact={true}
-            component={Trail}
+            component={TrailView}
           />
           <Route
             path="/mountains/:mountainId/weather"
