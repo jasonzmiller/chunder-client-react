@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import CreateMountain from './create-mountain';
 import axios from 'axios';
 
-
 export default class MountainList extends React.Component {
     
     state = {
@@ -15,12 +14,27 @@ export default class MountainList extends React.Component {
         axios({
             method: "get",
             withCredentials: true,
+            url: "http://localhost:4000/mountains"
+        }).then((res) => {
+            console.log(res);
+            const mountains = res.data;
+            this.setState({mountains});
+        });
+
+        axios({
+            method: "get",
+            withCredentials: true,
             url: "http://localhost:4000/user"
         }).then((res) => {
+            console.log(res);
             const users = res.data;
             this.setState({users});
         });
+
+        
     }
+    
+
     
     render(){
         return(
@@ -33,19 +47,18 @@ export default class MountainList extends React.Component {
 
             <ul className="list-group">
                 <h1>Mountains</h1>
-                <h1>{this.state.users.username}</h1>
-                <h1>{this.state.users._id}</h1>
-                
-            
+                <h1>{this.state.mountains.name}</h1>
                 
                 
             {
                 this.state.mountains.map((mountain) => {
                     return(
                         <li className="list-group-item">
-                            <Link to={`/mountains/${mountain.id}`}>
+                            <Link to={`/mountains/${mountain._id}`}>
                                 {mountain.name}
                             </Link>
+                            <i className="fas fa-plus float-right"
+                            onClick={() => console.log(`Added ${mountain.name} to user ${this.state.users.username}`)}></i>
                         </li>
                     )
                 })

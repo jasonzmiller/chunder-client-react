@@ -71,6 +71,7 @@ export default class Profile extends React.Component {
                         })
                 })}
                 >Find Mountains</button>
+                <button><Link to = {`${this.state.users._id}/mountains/`}>Browse Mountains</Link></button>
             </div>
             <div className="row">
                 {
