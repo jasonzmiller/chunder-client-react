@@ -1,8 +1,7 @@
 import React , { useState } from 'react';
+import { Link , useParams } from 'react-router-dom';
 import { deleteTrail } from '../services/trail-service';
 import TrailWarnings from './trail-warnings';
-
-// import { connect } from 'react-redux';
 
 const Trail = (
     {
@@ -11,6 +10,8 @@ const Trail = (
 ) => {
 
     const [editing, setEditing] = useState(false)
+
+    const { mountainId } = useParams()
 
         return(
             <>
@@ -21,7 +22,9 @@ const Trail = (
                         <div className="col-4">
                             <i className="fas fa-edit" onClick={() => setEditing(true)}></i>
                             <i className="fas fa-cross" onClick={() => deleteTrail(trail._id)}></i>
-                            {trail.trailName}
+                            <Link to={`/mountains/${mountainId}/trails/${trail._id}`}>
+                                {trail.trailName}
+                            </Link>
                         </div>
                         <div className="col-2">
                             {trail.section}

@@ -19,7 +19,10 @@ export const createTrailForMountain = (newTrail) => {
     }).then((res) => console.log(res));
 
 }
-export const findTrailbyId = (trailId) => {}
+export const findTrailbyId = (trailId) => {
+    return fetch(`http://localhost:4000/trails/${trailId}`)
+        .then(response => response.json())
+}
 
 export const findTrailsForMountain = (mountainId) => {
     return fetch(`http://localhost:4000/mountains/${mountainId}/trails`)

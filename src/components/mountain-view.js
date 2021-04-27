@@ -19,9 +19,9 @@ const MountainView = (
     const [trailsForMountain, setTrailsForMountain] = useState([])
     const [mountain, setMountain] = useState({})
 
-    useEffect(async () => {
-        loadPage()
-        /*
+    useEffect(() => {
+        /* loadPage() */
+        
         if(mountain !== "undefined" && typeof mountain !== "undefined"){
             findMountainById(mountainId)
                 .then(res => setMountain(res))
@@ -36,9 +36,9 @@ const MountainView = (
             }
         
         if(weatherReport !== "undefined" && typeof weatherReport !== "undefined"){
-            findWeatherForCity(mountain.name)
+            findWeatherForCity("denver")
         }
-        */
+       
     }, [])
 
     const loadPage = async () => {
@@ -97,7 +97,7 @@ const MountainView = (
                 </>
             }
             </div>
-            {/* <div className="col-6">
+            <div className="col-6">
                 <div className="col-12">
                         Current weather:
                     </div>
@@ -114,8 +114,8 @@ const MountainView = (
                             findWeatherForCity(mountain.city)
                             }}>REFRESH WEATHER</button>
                 </div>
-            </div> */}
-            {mountain.city !== "undefined" && typeof mountain.city !== "undefined" ? <WeatherReport city={mountain.city}></WeatherReport> : <h1>Wah</h1>}
+            </div>
+            {/* {mountain.city !== "undefined" && typeof mountain.city !== "undefined" ? <WeatherReport city={mountain.city}></WeatherReport> : <h1>Wah</h1>} */}
         </div>
         <TrailList trails={trailsForMountain}></TrailList>
         </>

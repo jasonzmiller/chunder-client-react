@@ -1,4 +1,4 @@
-import React from 'react';
+import React , { useState } from 'react';
 
 const TrailWarnings = (
     {
@@ -6,6 +6,9 @@ const TrailWarnings = (
         editing
     }
 ) => {
+
+    const [cachedWarnings, setCachedWarnings] = useState([])
+
     return(
         <>
         {
