@@ -54,7 +54,7 @@ export default class MountainList extends React.Component {
             {
                 this.state.mountains.map((mountain) => {
                     return(
-                        <li className="list-group-item">
+                        <li className="list-group-item" key={mountain._id}>
                             <Link to={`/mountains/${mountain._id}`}>
                                 {mountain.name}
                             </Link>

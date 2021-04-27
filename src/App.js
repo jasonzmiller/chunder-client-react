@@ -2,6 +2,7 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import { combineReducers, createStore } from 'redux';
 import { Provider } from 'react-redux';
 import './App.css';
+import Home from './components/home';
 import Login from './components/login';
 import Register from './components/register';
 import Profile from './components/profile';
@@ -28,6 +29,11 @@ function App() {
     <BrowserRouter>
       <Provider store={store}>
         <div className="container-fluid overall-chunder">
+          <Route
+            path="/"
+            exact={true}
+            component={Home}
+          />
           <Route
             path="/login"
             exact={true}
