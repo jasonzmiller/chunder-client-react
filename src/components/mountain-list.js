@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import CreateMountain from './create-mountain';
 import axios from 'axios';
+import { addMountainToUser } from '../services/mountain-service';
 
 export default class MountainList extends React.Component {
     
@@ -58,7 +59,10 @@ export default class MountainList extends React.Component {
                                 {mountain.name}
                             </Link>
                             <i className="fas fa-plus float-right"
-                            onClick={() => console.log(`Added ${mountain.name} to user ${this.state.users.username}`)}></i>
+                            onClick={() => {
+                                addMountainToUser(mountain._id, this.state.users._id)
+                                console.log(`Added ${mountain.name} to user ${this.state.users.username}`)
+                            }}></i>
                         </li>
                     )
                 })

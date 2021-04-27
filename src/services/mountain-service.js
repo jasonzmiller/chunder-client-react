@@ -18,12 +18,17 @@ export const createMountain = (newMountain) => {
 }
 
 export const addMountainToUser = (mid, uid) => {
-    fetch(`http://localhost:4000/profile/${uid}/mountains/${mid}`, {
-        method: "PUT",
-        body: JSON.stringify(mid),
+    axios({
+        method: "post",
+        data: {
+            mid: mid,
+            uid: uid
+        },
         headers: {
-            'content-type' : 'application/json'
-        }
+            'content-type': 'application/json'
+        },
+        withCredentials: true,
+        url: `http://localhost:4000/${uid}/mountains`
     }).then(response => response.json())
 }
 
