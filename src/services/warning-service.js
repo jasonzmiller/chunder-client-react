@@ -1,5 +1,5 @@
-import axios from "axios"
-const TRAIL_URL = "http://localhost:4000/trails/"
+import axios from 'axios';
+const HOST_URL = 'http://localhost:4000';
 
 export const createWarningForTrail = (newWarning) => {
     axios({
@@ -13,19 +13,19 @@ export const createWarningForTrail = (newWarning) => {
             'content-type': 'application/json'
         },
         withCredentials: true,
-        url: `http://localhost:4000/warnings`
+        url: `${HOST_URL}/warnings`
     }).then((res) => console.log(res));
 }
 
 export const findWarningById = (warningId) => {}
 
 export const findWarningsForTrail = (mountainId, trailId) => {
-    return fetch(`http://localhost:4000/mountains/${mountainId}/trails/${trailId}/warnings`)
+    return fetch(`${HOST_URL}/mountains/${mountainId}/trails/${trailId}/warnings`)
         .then(response => response.json())
 }
 
 export const updateWarning = (warningId, updateToWarning) => {
-    fetch(`http://localhost:4000/warnings/${warningId}`, {
+    fetch(`${HOST_URL}/warnings/${warningId}`, {
         method: "PUT",
         body: JSON.stringify(updateToWarning),
         headers: {
@@ -36,7 +36,7 @@ export const updateWarning = (warningId, updateToWarning) => {
 }
 
 export const deleteWarning = (warningId) => {
-    fetch(`http://localhost:4000/warnings/${warningId}`, {
+    fetch(`${HOST_URL}/warnings/${warningId}`, {
         method: "DELETE",
         withCredentials: true
     })

@@ -1,4 +1,5 @@
-import axios from "axios"
+import axios from 'axios';
+const HOST_URL = 'http://localhost:4000';
 
 export const createMountain = (newMountain) => {
     axios({
@@ -13,7 +14,7 @@ export const createMountain = (newMountain) => {
             'content-type': 'application/json'
         },
         withCredentials: true,
-        url: "http://localhost:4000/mountains"
+        url: `${HOST_URL}/mountains`
     }).then((res) => console.log(res));
 }
 
@@ -28,7 +29,7 @@ export const addMountainToUser = (mid, uid) => {
             'content-type': 'application/json'
         },
         withCredentials: true,
-        url: `http://localhost:4000/${uid}/mountains`
+        url: `${HOST_URL}/${uid}/mountains`
     }).then(response => response.json())
 }
 
@@ -37,17 +38,17 @@ export const findAllMountains = () => {
     axios({
         method: "get",
         withCredentials: true,
-        url: 'http://localhost:4000/mountains'
+        url: `${HOST_URL}/mountains`
     }).then((res) => console.log(res));
 }
 
 export const findMountainsForUser = (userId) => {
-    return fetch(`http://localhost:4000/${userId}/mountains`)
+    return fetch(`${HOST_URL}/${userId}/mountains`)
         .then(response => response.json())
 }
 
 export const findMountainById = (mountainId) => 
-    fetch(`http://localhost:4000/mountains/${mountainId}`)
+    fetch(`${HOST_URL}/mountains/${mountainId}`)
         .then(response => response.json())
 
 export const findMountainByName = (mountainName) => {
@@ -58,17 +59,29 @@ export const findMountainByName = (mountainName) => {
             name: mountainName
         },
         withCredentials: true,
-        url:`http://localhost:4000/mountains/${mountainName}`
+        url:`${HOST_URL}/mountains/${mountainName}`
     }).then((res) => {
         console.log(res)
         return res.data
     })
 }
 
-export const updateMountain = (mountainId) => {}
+export const updateMountain = (mountainId, updateToMountain) => {
+    fetch(`${HOST_URL}/${mountainId}`, {
+        method: "PUT",
+        body: JSON.stringify(updateToMountain),
+        headers: {
+            'content-type' : 'application/json'
+        },
+        withCredentials: true
+    })
+}
 
 export const deleteMountain = (mountainId) => {
-
+    fetch(`${HOST_URL}/${mountainId}`, {
+        method: "DELETE"
+    })
+        .then(response => response.json())
 }
 
 const api = {

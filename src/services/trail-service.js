@@ -1,4 +1,5 @@
-import axios from 'axios'
+import axios from 'axios';
+const HOST_URL = 'http://localhost:4000';
 
 export const createTrailForMountain = (newTrail) => {
     axios({
@@ -15,24 +16,33 @@ export const createTrailForMountain = (newTrail) => {
             'content-type': 'application/json'
         },
         withCredentials: true,
-        url: `http://localhost:4000/trails`
+        url: `${HOST_URL}/trails`
     }).then((res) => console.log(res));
 
 }
 export const findTrailbyId = (trailId) => {
-    return fetch(`http://localhost:4000/trails/${trailId}`)
+    return fetch(`${HOST_URL}/trails/${trailId}`)
         .then(response => response.json())
 }
 
 export const findTrailsForMountain = (mountainId) => {
-    return fetch(`http://localhost:4000/mountains/${mountainId}/trails`)
+    return fetch(`${HOST_URL}/mountains/${mountainId}/trails`)
         .then(response => response.json())
 }
 
-export const updateTrail = (trailId) => {}
+export const updateTrail = (trailId, updateToTrail) => {
+    fetch(`${HOST_URL}/trails/${trailId}`, {
+        method: 'POST',
+        body: JSON.stringify(updateToTrail),
+        headers: {
+            'content-type' : 'application/json'
+        },
+        withCredentials: true
+    })
+}
 
 export const deleteTrail = (trailId) => {
-    fetch(`http://localhost:4000/trails/${trailId}`, {
+    fetch(`${HOST_URL}/trails/${trailId}`, {
         method: "DELETE",
         withCredentials: true
     })
