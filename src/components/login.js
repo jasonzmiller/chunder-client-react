@@ -50,10 +50,6 @@ const Login = () => {
                     />
                 </div>
             </div>
-            <div>
-                <h1>Get User</h1>
-                <button onClick={getUser}>Get User</button>
-            </div>
         </>
     )
 }
