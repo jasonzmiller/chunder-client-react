@@ -34,6 +34,14 @@ export default class Profile extends React.Component {
         }).then((res) => res.data);
     }
 
+    Logout = () => {
+        axios({
+            method: "get",
+            withCredentials: true,
+            url: "http://localhost:4000/logout"
+        }).then(window.location = '/')
+    }
+    
     componentDidMount(){
         axios({
             method: "get",
@@ -72,6 +80,7 @@ export default class Profile extends React.Component {
                 <div>
                     <h4>Hello, {this.state.users.username}!</h4>
                 </div>
+                <button onClick={() => this.Logout()}>Logout</button>
             </div>
             <div>
                 <button
