@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import axios from 'axios';
 import { findMountainById } from '../services/mountain-service';
 
@@ -9,7 +9,8 @@ export default class Profile extends React.Component {
     state = {
        users: [],
        mountainsForUser: [],
-       mountainObjects: []
+       mountainObjects: [],
+       redirect_path:''
     }
 
     /*
@@ -25,6 +26,13 @@ export default class Profile extends React.Component {
         });
     }
     */
+    getUser = () => {
+        axios({
+            method: "get",
+            withCredentials: true,
+            url: "http://localhost:4000/user"
+        }).then((res) => res.data);
+    }
 
     componentDidMount(){
         axios({
@@ -34,6 +42,11 @@ export default class Profile extends React.Component {
         })
             .then(res => {
                 const users = res.data;
+                if(users === undefined){
+                    this.setState({
+                        redirect_path:'/login'
+                    })
+                }
                 const mountainsForUser = users.mountains;
                 this.setState({ users });
                 this.setState({ mountainsForUser })
@@ -44,8 +57,15 @@ export default class Profile extends React.Component {
     }
 
     
+
+    
     
     render(){
+    if(this.state.redirect_path === '/login'){
+        return(
+            <Redirect push to={'/login'}/>
+        )
+    } else {
     return (
         <div>
             <div className="row">
@@ -98,5 +118,6 @@ export default class Profile extends React.Component {
         </div>
     )
 
+        }
     }
 }
