@@ -18,7 +18,7 @@ const Login = () => {
             },
             withCredentials: true,
             url: "http://localhost:4000/register"
-        }).then((res) => console.log(res));
+        }).then((res) => window.location = `/login`);
     }
     const getUser = () => {
     
