@@ -2,6 +2,7 @@ import React , { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { connect } from 'react-redux';
 import TrailList from './trail-list';
+import Weather from './weather';
 import WeatherReport from './weather-report';
 import MountainHeader from './mountain-header';
 import weatherService from '../services/weather-service';
@@ -20,8 +21,6 @@ const MountainView = (
     const [mountain, setMountain] = useState({})
 
     useEffect(() => {
-        /* loadPage() */
-        
         if(mountain !== "undefined" && typeof mountain !== "undefined"){
             findMountainById(mountainId)
                 .then(res => setMountain(res))
@@ -33,18 +32,8 @@ const MountainView = (
                     ...trailsForMountain,
                     res
                 ));
-            }
-        
-        if(weatherReport !== "undefined" && typeof weatherReport !== "undefined"){
-            findWeatherForCity("denver")
         }
-       
     }, [])
-
-    const loadPage = async () => {
-        findMountainById(mountainId).then(res => setMountain(res))
-        findTrailsForMountain(mountainId).then(res => setTrailsForMountain(...trailsForMountain, res))
-    }
 
     // utility function to convert a string to title case
     String.prototype.toProperCase = function () {
@@ -66,8 +55,8 @@ const MountainView = (
                 <div className="col-12">
                     <h3>
                         {mountain.name}
-                    <i className="fa fa-edit" onClick={() => setEditingMountain(true)}></i>
-                    <i className="fa fa-heart" onClick={() => alert("TODO:\nif user is logged in\nadd this resort to favorites")}></i>
+                    {/* <i className="fa fa-edit" onClick={() => setEditingMountain(true)}></i>
+                    <i className="fa fa-heart" onClick={() => alert("TODO:\nif user is logged in\nadd this resort to favorites")}></i> */}
                     </h3>
                 </div>
                 <div className="col-6">
@@ -97,10 +86,12 @@ const MountainView = (
                 </>
             }
             </div>
-            <div className="col-6">
+            <Weather></Weather>
+            {/* <div className="col-6">
+                <Weather></Weather>
                 <div className="col-12">
-                        Current weather:
-                    </div>
+                    Current weather:
+                </div>
                 <div className="col-12">
                     Temperature (C):
                 </div>
@@ -112,9 +103,10 @@ const MountainView = (
                         className="btn btn-warning" 
                         onClick={() => {
                             findWeatherForCity(mountain.city)
-                            }}>REFRESH WEATHER</button>
+                            }}>REFRESH WEATHER
+                    </button>
                 </div>
-            </div>
+            </div> */}
             {/* {mountain.city !== "undefined" && typeof mountain.city !== "undefined" ? <WeatherReport city={mountain.city}></WeatherReport> : <h1>Wah</h1>} */}
         </div>
         <TrailList trails={trailsForMountain}></TrailList>

@@ -1,10 +1,85 @@
 import React , { useEffect , useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { connect } from 'react-redux';
-import weatherService from '../services/weather-service';
+import weatherService, { findWeatherForCity } from '../services/weather-service';
 import { useFetchJSON } from './useFetchJSON';
+import { findMountainById } from '../services/mountain-service';
 
 const Weather = () => {
+    
+    const [ weatherReport , setWeatherReport ] = useState();
+    const [ mountain , setMountain ] = useState();
+
+    const { mountainId } = useParams();
+
+    useEffect(() => {
+        findMountainById(mountainId).then(res => setMountain(res))
+    }, [])
+
+    return(
+        <>
+        <div className="col-6">
+        {
+            !weatherReport
+            ?
+            <button
+                    className="btn btn-secondary"
+                    onClick={() =>
+                        findWeatherForCity(mountain.city)
+                            .then(res => setWeatherReport(res))
+                    }
+                >
+                    Get weather
+            </button>
+            :
+            <>
+            <div className="col-12">
+                Current weather: {weatherReport.weather[0].main}
+            </div>
+            <div className="col-12">
+                Temperature (C): {Math.round(weatherReport.main.temp - 273.15)}
+            </div>
+            <div className="col-12">
+                Wind: {weatherReport.wind.speed}
+            </div>
+            <div className="col-12">
+                <button 
+                    className="btn btn-warning" 
+                    onClick={() => {
+                        findWeatherForCity(mountain.city)
+                            .then(res => setWeatherReport(res))
+                        }}>REFRESH WEATHER
+                </button>
+            </div>
+            </>
+        }
+        {
+            mountain
+            ?
+            <div>
+                {/* <button
+                    className="btn btn-secondary"
+                    onClick={() =>
+                        findWeatherForCity(mountain.city)
+                            .then(res => setWeatherReport(res))
+                    }
+                >
+                    Get weather
+                </button> */}
+            </div>
+            :
+            <div>
+                <h1>LOADING</h1>
+            </div>
+        }
+        </div>
+        </>
+    )
+}
+
+export default Weather
+
+/* const Weather = () => {
 
     const { mountainId } = useParams();
 
@@ -44,7 +119,7 @@ const Weather = () => {
     )
 }
 
-export default Weather
+export default Weather */
 
 /* const Weather = ({weatherReport, findWeatherForCity}) => {
 

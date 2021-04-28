@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import CreateMountain from './create-mountain';
 import axios from 'axios';
-import { addMountainToUser } from '../services/mountain-service';
+import { addMountainToUser , deleteMountain } from '../services/mountain-service';
 
 export default class MountainList extends React.Component {
     
@@ -55,14 +55,36 @@ export default class MountainList extends React.Component {
                 this.state.mountains.map((mountain) => {
                     return(
                         <li className="list-group-item" key={mountain._id}>
-                            <Link to={`/mountains/${mountain._id}`}>
-                                {mountain.name}
-                            </Link>
-                            <i className="fas fa-plus float-right"
-                            onClick={() => {
-                                addMountainToUser(mountain._id, this.state.users._id)
-                                console.log(`Added ${mountain.name} to user ${this.state.users.username}`)
-                            }}></i>
+                            <div className="row">
+                                <div className="col-6">    
+                                    <Link to={`/mountains/${mountain._id}`}>
+                                        {mountain.name}
+                                    </Link>
+                                </div>
+                                <div className="col-6">
+                                    <div className="btn-group" role="group">
+                                        <button
+                                            className="btn btn-secondary"
+                                            type="button"
+                                            onClick={() => {
+                                                addMountainToUser(mountain._id, this.state.users._id)
+                                                console.log(`Added ${mountain.name} to user ${this.state.users.username}`)
+                                            }}
+                                        >
+                                            Add to favorites
+                                        </button>
+                                        <button
+                                            className="btn btn-secondary"
+                                            type="button"
+                                            onClick={() => {
+                                                deleteMountain(mountain._id)
+                                            }}
+                                        >
+                                        DELETE MOUNTAIN
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
                         </li>
                     )
                 })

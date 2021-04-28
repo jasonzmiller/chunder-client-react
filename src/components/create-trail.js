@@ -29,7 +29,7 @@ const CreateTrail = ({
                 <label>trail status</label>
                 <input onChange={(e) => setCachedStatus(e.target.value)} className="form-control"></input>
 
-                <label>trail warnings</label>
+                {/* <label>trail warnings</label>
 
                 <div><button onClick={() => console.log(cachedWarnings)}>console: cached warnings</button></div>
                 <div>
@@ -124,7 +124,7 @@ const CreateTrail = ({
                             </label>
                         </li>
                     </ul>
-                </div>
+                </div> */}
                 {/* <select className="form-control" multiple onChange={e => console.log(e)} >
                     <option 
                         value="trees"

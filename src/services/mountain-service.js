@@ -35,11 +35,14 @@ export const addMountainToUser = (mid, uid) => {
 
 export const findAllMountains = () => {
     console.log("Trying to find mountains");
+    return fetch(`${HOST_URL}/mountains`)
+        .then(response => response.json())
+    /* console.log("Trying to find mountains");
     axios({
         method: "get",
         withCredentials: true,
         url: `${HOST_URL}/mountains`
-    }).then((res) => console.log(res));
+    }).then((res) => console.log(res)); */
 }
 
 export const findMountainsForUser = (userId) => {
@@ -67,7 +70,7 @@ export const findMountainByName = (mountainName) => {
 }
 
 export const updateMountain = (mountainId, updateToMountain) => {
-    fetch(`${HOST_URL}/${mountainId}`, {
+    fetch(`${HOST_URL}/mountains/${mountainId}`, {
         method: "PUT",
         body: JSON.stringify(updateToMountain),
         headers: {
@@ -78,7 +81,7 @@ export const updateMountain = (mountainId, updateToMountain) => {
 }
 
 export const deleteMountain = (mountainId) => {
-    fetch(`${HOST_URL}/${mountainId}`, {
+    fetch(`${HOST_URL}/mountains/${mountainId}`, {
         method: "DELETE"
     })
         .then(response => response.json())
