@@ -10,7 +10,9 @@ export default class MountainList extends React.Component {
     state = {
         mountains: [],
         users: [],
-        cachedSearch: ""
+        cachedSearch: "",
+        searchResult: {},
+        searched: false
     }
     
     componentDidMount(){
@@ -65,7 +67,10 @@ export default class MountainList extends React.Component {
                                 className="btn btn-secondary"
                                 type="button"
                                 style={{float: 'left'}}
-                                onClick={() => findMountainByName(this.state.cachedSearch)}
+                                onClick={() => {
+                                    findMountainByName(this.state.cachedSearch).then(response => this.setState({searchResult: response}))
+                                    this.setState({searched: true})
+                                }}
                             >
                                 Find mountain by name
                             </button>
@@ -74,6 +79,51 @@ export default class MountainList extends React.Component {
 
 
                 <ul className="list-group" style={{paddingTop: '20px'}}>
+                    {
+                        this.state.searched &&
+                        <ul className="list-group" style={{paddingBottom: '10px'}}>
+                            <li className="list-group-item"><h3>Search results</h3></li>
+                            {
+                                this.state.searchResult !== null ?
+                                <li className="list-group-item">
+                                    <div className="row">
+                                        <div className="col-6">    
+                                            <Link to={`/mountains/${this.state.searchResult._id}`}>
+                                                {this.state.searchResult.name}
+                                            </Link>
+                                        </div>
+                                        <div className="col-6">
+                                            <div className="btn-group" role="group" style={{float: 'right'}}>
+                                                <button
+                                                    className="btn btn-secondary"
+                                                    type="button"
+                                                    onClick={() => {
+                                                        addMountainToUser(this.state.searchResult._id, this.state.users._id)
+                                                        console.log(`Added ${this.state.searchResult.name} to user ${this.state.users.username}`)
+                                                    }}
+                                                >
+                                                    Add to favorites
+                                                </button>
+                                                <button
+                                                    className="btn btn-secondary"
+                                                    type="button"
+                                                    onClick={() => {
+                                                        deleteMountain(this.state.searchResult._id)
+                                                    }}
+                                                >
+                                                Delete mountain
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                :
+                                <li className="list-group-item">
+                                    <h3>No results</h3>
+                                </li>
+                            }
+                        </ul>
+                    }
                 {
                     this.state.mountains.map((mountain) => {
                         return(

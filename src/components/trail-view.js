@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { findTrailbyId } from '../services/trail-service';
 import { createWarningForTrail , findWarningsForTrail , deleteWarning , updateWarning } from '../services/warning-service';
 import axios from 'axios';
+import Navbar from './navbar';
 
 const TrailView = () => {
     
@@ -27,6 +28,7 @@ const TrailView = () => {
 
     return(
         <>
+        <Navbar></Navbar>
         <ul className="list-group" style={{padding: '20px'}}>
             <li className="list-group-item">
                 <h4>Name: {trail ? trail.trailName : "Loading..."}</h4>
