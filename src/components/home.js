@@ -14,8 +14,12 @@ const Home = () => {
         </div>
         <div className="header-overlay"></div>
         <div className="header-content">
+            <h1>Sender</h1>
+            <Link to={'/register'} style={{textDecoration: 'none', color: 'white'}}>
+                <h1>Register</h1>
+            </Link>
             <Link to={'/login'} style={{textDecoration: 'none', color: 'white'}}>
-                <h1>Sender</h1>
+                <h1>Login</h1>
             </Link>
         </div>
     </div>
