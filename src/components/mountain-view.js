@@ -12,6 +12,7 @@ import { findMountainById } from '../services/mountain-service';
 
 const MountainView = (
     {
+
         findWeatherForCity,
         weatherReport,
     }

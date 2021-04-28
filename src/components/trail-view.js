@@ -2,13 +2,23 @@ import React , { useState , useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { findTrailbyId } from '../services/trail-service';
 import { createWarningForTrail , findWarningsForTrail , deleteWarning , updateWarning } from '../services/warning-service';
+import axios from 'axios';
 
 const TrailView = () => {
+    
+    const getUser = () => {
+        axios({
+            method: "get",
+            withCredentials: true,
+            url: "http://localhost:4000/user"
+        }).then((res) => setAdmin(res.data.isAdmin));
+    }
 
     const { trailId , mountainId } = useParams();
     const [ trail , setTrail ] = useState();
     const [ warningsForTrail , setWarningsForTrail ] = useState();
     const [ cachedWarnings, setCachedWarnings ] = useState([]);
+    const [ isAdmin, setAdmin ] = useState(false);
 
     useEffect(() => {
         findTrailbyId(trailId).then(res => setTrail(res))
@@ -61,6 +71,21 @@ const TrailView = () => {
                                             >
                                                 UPVOTE
                                             </button>
+                                        {
+                                            !isAdmin &&
+                                            <button 
+                                                type="button"
+                                                className="btn btn-secondary"
+                                                onClick={() => {
+                                                    getUser();
+                                                    
+                                                }}
+                                            >
+                                                VERIFY PATROL
+                                            </button>
+                                        }
+                                        {
+                                            isAdmin &&
                                             <button 
                                                 type="button"
                                                 className="btn btn-secondary"
@@ -70,6 +95,7 @@ const TrailView = () => {
                                             >
                                                 DELETE
                                             </button>
+                                        }
                                         </div>
                                     </div>
                                 </div>
