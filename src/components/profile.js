@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import axios from 'axios';
 import { findMountainById } from '../services/mountain-service';
+import Navbar from './navbar';
 
 
 export default class Profile extends React.Component {
@@ -13,19 +14,6 @@ export default class Profile extends React.Component {
        redirect_path:''
     }
 
-    /*
-    getUser(){
-        axios({
-            method: "get",
-            withCredentials: true,
-            url: "http://localhost:4000/user"
-        }).then((res) => {
-            console.log(res)
-            const user = res.data;
-            this.setState({ user })
-        });
-    }
-    */
     getUser = () => {
         axios({
             method: "get",
@@ -75,56 +63,61 @@ export default class Profile extends React.Component {
         )
     } else {
     return (
-        <div>
-            <div className="row">
-                <div>
-                    <h4>Hello, {this.state.users.username}!</h4>
+        <>
+        <Navbar></Navbar>
+            <div style={{paddingTop: '20px'}}>
+                <div className="row">
+                    <div>
+                        <h4>Hello, {this.state.users.username}!</h4>
+                    </div>
+                    <button onClick={() => this.Logout()}>Logout</button>
                 </div>
-                <button onClick={() => this.Logout()}>Logout</button>
-            </div>
-            <div>
-                <button
-                onClick={() => this.state.mountainsForUser.map((mid) => {
-                    console.log("Finding" + mid);
-                    findMountainById(mid)
-                        .then(res => {
-                            console.log(res)
-                            const mtnToAdd = res;
-                            this.setState({
-                                mountainObjects: [
-                                    ...this.state.mountainObjects,
-                                    mtnToAdd
-                                ]
+                <div>
+                    <button
+                    onClick={() => this.state.mountainsForUser.map((mid) => {
+                        console.log("Finding" + mid);
+                        findMountainById(mid)
+                            .then(res => {
+                                console.log(res)
+                                const mtnToAdd = res;
+                                this.setState({
+                                    mountainObjects: [
+                                        ...this.state.mountainObjects,
+                                        mtnToAdd
+                                    ]
+                                })
+                                console.log(this.state.mountainObjects)
                             })
-                            console.log(this.state.mountainObjects)
-                        })
-                })}
-                >Find Mountains</button>
-                <button><Link to = {`${this.state.users._id}/mountains/`}>Browse Mountains</Link></button>
+                    })}
+                    >Find Mountains</button>
+                    <Link to = {`${this.state.users._id}/mountains/`}>
+                        <button>Browse Mountains</button>
+                    </Link>
+                </div>
+                <div className="row">
+                    {
+                        this.state.mountainObjects &&
+                        this.state.mountainObjects.map(mountain => 
+                            <div className="col-4">
+                                <ul className="list-group">
+                                    <li className="list-group-item">
+                                        <img style={{height: "20rem", width: "26rem"}} src="https://images.unsplash.com/photo-1532124957326-34c5605398?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1567&q=80"></img>
+                                    </li>
+                                    <li className="list-group-item">
+                                        Name: <Link to={`/mountains/${mountain._id}`}>{mountain.name}</Link>
+                                    </li>
+                                    <li className="list-group-item">
+                                        City: {mountain.city}
+                                    </li>
+                                    <li className="list-group-item">
+                                        State: {mountain.state}
+                                    </li>
+                                </ul>
+                            </div>)
+                    }
+                </div>
             </div>
-            <div className="row">
-                {
-                    this.state.mountainObjects &&
-                    this.state.mountainObjects.map(mountain => 
-                        <div className="col-4">
-                            <ul className="list-group">
-                                <li className="list-group-item">
-                                    <img style={{height: "20rem", width: "26rem"}} src="https://images.unsplash.com/photo-1532124957326-34c5605398?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1567&q=80"></img>
-                                </li>
-                                <li className="list-group-item">
-                                    Name: <Link to={`/mountains/${mountain._id}`}>{mountain.name}</Link>
-                                </li>
-                                <li className="list-group-item">
-                                    City: {mountain.city}
-                                </li>
-                                <li className="list-group-item">
-                                    State: {mountain.state}
-                                </li>
-                            </ul>
-                        </div>)
-                }
-            </div>
-        </div>
+        </>
     )
 
         }

@@ -1,6 +1,6 @@
 import React , { useState } from 'react';
 import { Link , useParams } from 'react-router-dom';
-import { deleteTrail } from '../services/trail-service';
+import { deleteTrail , updateTrail } from '../services/trail-service';
 import TrailWarnings from './trail-warnings';
 
 const Trail = (
@@ -71,13 +71,25 @@ const Trail = (
                             ></input>
                         </div>
                         <div className="col-2">
-                            <input className="form-control" defaultValue={trail.section}></input>
+                            <input 
+                                className="form-control"
+                                defaultValue={trail.section}
+                                onChange={e => setCachedTrail({...cachedTrail, section: e.target.value})}
+                            ></input>
                         </div>
                         <div className="col-2">
-                            <input className="form-control" defaultValue={trail.trailRating}></input>
+                            <input
+                                className="form-control"
+                                defaultValue={trail.trailRating}
+                                onChange={e => setCachedTrail({...cachedTrail, trailRating: e.target.value})}
+                            ></input>
                         </div>
                         <div className="col-2">
-                            <input className="form-control" defaultValue={trail.trailStatus}></input>
+                            <input
+                                className="form-control"
+                                defaultValue={trail.trailStatus}
+                                onChange={e => setCachedTrail({...cachedTrail, trailStatus: e.target.value})}
+                            ></input>
                         </div>
                         <div className="col-2">
                             <div
@@ -87,7 +99,10 @@ const Trail = (
                                 <button
                                     className="btn btn-secondary"
                                     type="button"
-                                    onClick={() => setEditing(false)}
+                                    onClick={() => {
+                                        updateTrail(trail._id, cachedTrail)
+                                        setEditing(false)
+                                    }}
                                 >
                                     <i className="fas fa-edit"></i>
                                 </button>

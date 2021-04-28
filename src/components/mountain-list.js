@@ -1,14 +1,16 @@
-import React from 'react';
+import React , { useState } from 'react';
 import { Link } from 'react-router-dom';
 import CreateMountain from './create-mountain';
 import axios from 'axios';
-import { addMountainToUser , deleteMountain } from '../services/mountain-service';
+import { addMountainToUser , deleteMountain , findMountainByName } from '../services/mountain-service';
+import Navbar from './navbar';
 
 export default class MountainList extends React.Component {
     
     state = {
         mountains: [],
-        users: []
+        users: [],
+        cachedSearch: ""
     }
     
     componentDidMount(){
@@ -35,61 +37,83 @@ export default class MountainList extends React.Component {
         
     }
     
-
-    
     render(){
         return(
             <>
-            <ul className="list-group">
-                <CreateMountain 
-                    // createMountain={createMountain}
-                ></CreateMountain>
-            </ul>
+            <Navbar></Navbar>
+            <div style={{paddingTop: '20px'}}>
+                <ul className="list-group">
+                    <CreateMountain></CreateMountain>
+                </ul>
 
-            <ul className="list-group">
                 <h1>Mountains</h1>
-                <h1>{this.state.mountains.name}</h1>
-                
-                
-            {
-                this.state.mountains.map((mountain) => {
-                    return(
-                        <li className="list-group-item" key={mountain._id}>
-                            <div className="row">
-                                <div className="col-6">    
-                                    <Link to={`/mountains/${mountain._id}`}>
-                                        {mountain.name}
-                                    </Link>
-                                </div>
-                                <div className="col-6">
-                                    <div className="btn-group" role="group">
-                                        <button
-                                            className="btn btn-secondary"
-                                            type="button"
-                                            onClick={() => {
-                                                addMountainToUser(mountain._id, this.state.users._id)
-                                                console.log(`Added ${mountain.name} to user ${this.state.users.username}`)
-                                            }}
-                                        >
-                                            Add to favorites
-                                        </button>
-                                        <button
-                                            className="btn btn-secondary"
-                                            type="button"
-                                            onClick={() => {
-                                                deleteMountain(mountain._id)
-                                            }}
-                                        >
-                                        DELETE MOUNTAIN
-                                        </button>
+                    <h1>{this.state.mountains.name}</h1>
+                    <div className="row">
+                        <div className="col-9">
+                            <input 
+                                className="form-control"
+                                placeholder="Search..."
+                                onChange={e => {
+                                    const cachedSearch = e.target.value
+                                    this.setState({cachedSearch})
+                                }}
+                            >
+                            </input>
+                        </div>
+                        <div className="col-3">
+                            <button 
+                                className="btn btn-secondary"
+                                type="button"
+                                style={{float: 'left'}}
+                                onClick={() => findMountainByName(this.state.cachedSearch)}
+                            >
+                                Find mountain by name
+                            </button>
+                        </div>
+                    </div>
+
+
+                <ul className="list-group" style={{paddingTop: '20px'}}>
+                {
+                    this.state.mountains.map((mountain) => {
+                        return(
+                            <li className="list-group-item" key={mountain._id}>
+                                <div className="row">
+                                    <div className="col-6">    
+                                        <Link to={`/mountains/${mountain._id}`}>
+                                            {mountain.name}
+                                        </Link>
+                                    </div>
+                                    <div className="col-6">
+                                        <div className="btn-group" role="group" style={{float: 'right'}}>
+                                            <button
+                                                className="btn btn-secondary"
+                                                type="button"
+                                                onClick={() => {
+                                                    addMountainToUser(mountain._id, this.state.users._id)
+                                                    console.log(`Added ${mountain.name} to user ${this.state.users.username}`)
+                                                }}
+                                            >
+                                                Add to favorites
+                                            </button>
+                                            <button
+                                                className="btn btn-secondary"
+                                                type="button"
+                                                onClick={() => {
+                                                    deleteMountain(mountain._id)
+                                                }}
+                                            >
+                                            Delete mountain
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </li>
-                    )
-                })
-            }
-            </ul>
+                            </li>
+                        )
+                    })
+                }
+                </ul>
+            </div>
             </>
         )
     }

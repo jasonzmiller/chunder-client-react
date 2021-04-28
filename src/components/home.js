@@ -14,7 +14,10 @@ const Home = () => {
         </div>
         <div className="header-overlay"></div>
         <div className="header-content">
-            <h1>Sender</h1>
+            {/* <Link to={'/mountains'} style={{textDecoration: 'none', color: 'white'}}>
+                <h1>Chunder</h1>
+            </Link> */}
+            <h1>Chunder</h1>
             <Link to={'/register'} style={{textDecoration: 'none', color: 'white'}}>
                 <h1>Register</h1>
             </Link>

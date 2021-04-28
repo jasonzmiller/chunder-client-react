@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { connect } from 'react-redux';
 import TrailList from './trail-list';
 import Weather from './weather';
+import Navbar from './navbar';
 import WeatherReport from './weather-report';
 import MountainHeader from './mountain-header';
 import weatherService from '../services/weather-service';
@@ -47,69 +48,53 @@ const MountainView = (
 
     return(
         <>
-        <div className="row">
-            <div className="col-6">
-            {
-                !editingMountain &&
-                <>
-                <div className="col-12">
-                    <h3>
-                        {mountain.name}
-                    {/* <i className="fa fa-edit" onClick={() => setEditingMountain(true)}></i>
-                    <i className="fa fa-heart" onClick={() => alert("TODO:\nif user is logged in\nadd this resort to favorites")}></i> */}
-                    </h3>
-                </div>
+        <Navbar></Navbar>
+        <div style={{paddingTop: '20px'}}>
+            <div className="row">
                 <div className="col-6">
-                    <h5>{mountain.city}, {mountain.state}</h5>
+                {
+                    !editingMountain &&
+                    <>
+                    <div className="col-12">
+                        <h3>
+                            {mountain.name}
+                        {/* <i className="fa fa-edit" onClick={() => setEditingMountain(true)}></i>
+                        <i className="fa fa-heart" onClick={() => alert("TODO:\nif user is logged in\nadd this resort to favorites")}></i> */}
+                        </h3>
+                    </div>
+                    <div className="col-6">
+                        <h5>{mountain.city}, {mountain.state}</h5>
+                    </div>
+                    </>
+                }
+                {
+                    editingMountain &&
+                    <>
+                    <ul className="list-group">
+                        <li className="list-group-item">
+                            <label>Mountain Name</label>
+                            <input onChange={(e) => setCachedName(e.target.value)} defaultValue={mountain.name} className="form-control"></input>
+
+                            <label>City</label>
+                            <input onChange={(e) => setCachedCity(e.target.value)} defaultValue={mountain.city} className="form-control"></input>
+
+                            <label>State</label>
+                            <input onChange={(e) => setCachedState(e.target.value)} defaultValue={mountain.state} className="form-control"></input>
+                        </li>
+                        <li className="list-group-item">
+                            <button className="btn btn-danger" onClick={() => setEditingMountain(false)}>Update Mountain</button>
+                        </li>
+                        
+                    </ul>
+                    </>
+                }
                 </div>
-                </>
-            }
-            {
-                editingMountain &&
-                <>
-                <ul className="list-group">
-                    <li className="list-group-item">
-                        <label>Mountain Name</label>
-                        <input onChange={(e) => setCachedName(e.target.value)} defaultValue={mountain.name} className="form-control"></input>
-
-                        <label>City</label>
-                        <input onChange={(e) => setCachedCity(e.target.value)} defaultValue={mountain.city} className="form-control"></input>
-
-                        <label>State</label>
-                        <input onChange={(e) => setCachedState(e.target.value)} defaultValue={mountain.state} className="form-control"></input>
-                    </li>
-                    <li className="list-group-item">
-                        <button className="btn btn-danger" onClick={() => setEditingMountain(false)}>Update Mountain</button>
-                    </li>
-                    
-                </ul>
-                </>
-            }
-            </div>
-            <Weather></Weather>
-            {/* <div className="col-6">
                 <Weather></Weather>
-                <div className="col-12">
-                    Current weather:
-                </div>
-                <div className="col-12">
-                    Temperature (C):
-                </div>
-                <div className="col-12">
-                    Wind:
-                </div>
-                <div className="col-12">
-                    <button 
-                        className="btn btn-warning" 
-                        onClick={() => {
-                            findWeatherForCity(mountain.city)
-                            }}>REFRESH WEATHER
-                    </button>
-                </div>
-            </div> */}
-            {/* {mountain.city !== "undefined" && typeof mountain.city !== "undefined" ? <WeatherReport city={mountain.city}></WeatherReport> : <h1>Wah</h1>} */}
+            </div>
+            <div style={{paddingTop: '20px'}}>
+                <TrailList trails={trailsForMountain}></TrailList>
+            </div>
         </div>
-        <TrailList trails={trailsForMountain}></TrailList>
         </>
     )
 }
